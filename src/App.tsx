@@ -1,14 +1,18 @@
 import React from 'react';
 import {
-  Activity, AlertTriangle, DollarSign, Percent, Users,
-  Shield, Clock, Ban
+  Activity, AlertTriangle, DollarSign, Percent,
+  Users, Shield, Clock, Ban
 } from 'lucide-react';
 
 import { MetricCard } from './components/MetricCard';
 import { TransactionList } from './components/TransactionList';
 import { AlertsList } from './components/AlertsList';
 
-import type { Transaction, MetricCard as MetricCardType, AlertMessage } from './types';
+import type {
+  Transaction,
+  MetricCard as MetricCardType,
+  AlertMessage
+} from './types';
 
 const mockMetrics: MetricCardType[] = [
   { title: 'Total Transactions', value: '2,543', change: 12, icon: Activity, trend: 'up', details: 'Processed in the last 24 hours' },
@@ -71,19 +75,19 @@ function App() {
           <div className="text-sm text-gray-500">Last updated: {new Date().toLocaleTimeString()}</div>
         </div>
 
-        {/* Metric Cards Grid */}
+        {/* Metrics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {mockMetrics.map((metric) => (
             <MetricCard key={metric.title} {...metric} />
           ))}
         </div>
 
-        {/* Transactions + Alerts Grid */}
+        {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <TransactionList transactions={mockTransactions} />
           <AlertsList alerts={mockAlerts} />
         </div>
-        
+
       </div>
     </div>
   );
