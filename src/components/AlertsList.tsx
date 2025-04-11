@@ -1,5 +1,7 @@
 import React from 'react';
-import { AlertCircle, Clock, User, CheckCircle, Search } from 'lucide-react';
+import {
+  AlertCircle, Clock, User, CheckCircle, Search
+} from 'lucide-react';
 import type { AlertMessage } from '../types';
 
 interface Props {
@@ -25,33 +27,52 @@ export function AlertsList({ alerts }: Props) {
     }
   };
 
-  const filtered = alerts.filter(a => filter === 'all' || a.severity === filter);
+  const filtered = alerts.filter((alert) =>
+    filter === 'all' || alert.severity === filter
+  );
 
   return (
     <div className="bg-white rounded-xl shadow p-6">
       <div className="flex justify-between mb-4 items-center">
         <h2 className="text-lg font-semibold text-gray-900">Recent Alerts</h2>
-        <select className="text-sm border rounded-md px-2 py-1" value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <select
+          className="text-sm border rounded-md px-2 py-1"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
           <option value="all">All Severities</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
       </div>
+
       <ul className="divide-y">
-        {filtered.map(alert => (
+        {filtered.map((alert) => (
           <li key={alert.id} className="py-4 flex gap-4">
             <div>{getStatusIcon(alert.status)}</div>
             <div className="flex-1 min-w-0">
               <p className="text-sm text-gray-900">{alert.message}</p>
-              <div className="mt-2 flex gap-2 flex-wrap text-xs">
-                <span className={`px-2 py-1 rounded-full font-semibold ${getSeverityStyle(alert.severity)}`}>{alert.severity.toUpperCase()}</span>
-                <span className="flex items-center text-gray-500"><Clock className="w-3 h-3 mr-1" />{new Date(alert.timestamp).toLocaleString()}</span>
-                <span className="flex items-center text-gray-500"><User className="w-3 h-3 mr-1" />{alert.affectedUser}</span>
+              <div className="mt-2 flex flex-wrap gap-2 text-xs">
+                <span className={`px-2 py-1 rounded-full font-semibold ${getSeverityStyle(alert.severity)}`}>
+                  {alert.severity.toUpperCase()}
+                </span>
+                <span className="flex items-center text-gray-500">
+                  <Clock className="w-3 h-3 mr-1" />
+                  {new Date(alert.timestamp).toLocaleString()}
+                </span>
+                <span className="flex items-center text-gray-500">
+                  <User className="w-3 h-3 mr-1" />
+                  {alert.affectedUser}
+                </span>
               </div>
-              <p className="mt-1 text-sm text-gray-600">Recommended Action: {alert.recommendedAction}</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Recommended Action: {alert.recommendedAction}
+              </p>
             </div>
-            <div className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full self-start font-medium">{alert.category}</div>
+            <div className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full self-start font-medium">
+              {alert.category}
+            </div>
           </li>
         ))}
       </ul>
