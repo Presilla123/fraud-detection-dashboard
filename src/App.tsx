@@ -5,7 +5,6 @@ import { TransactionList } from './components/TransactionList';
 import { AlertsList } from './components/AlertsList';
 import type { Transaction, MetricCard as MetricCardType, AlertMessage } from './types';
 
-// Mock data
 const mockMetrics: MetricCardType[] = [
   { title: 'Total Transactions', value: '2,543', change: 12, icon: Activity, trend: 'up', details: 'Processed in the last 24 hours' },
   { title: 'Fraud Rate', value: '0.8%', change: -2.3, icon: Percent, trend: 'down', details: 'Flagged as fraudulent' },
@@ -64,9 +63,28 @@ function App() {
           <h1 className="text-2xl font-bold text-gray-900">Fraud Detection Dashboard</h1>
           <div className="text-sm text-gray-500">Last updated: {new Date().toLocaleTimeString()}</div>
         </div>
+
+        {/* ✅ Metric Cards Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {mockMetrics.map((metric) => (
             <MetricCard key={metric.title} {...metric} />
           ))}
         </div>
-        <div className="
+
+        {/* ✅ Transactions and Alerts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TransactionList transactions={mockTransactions} />
+          <AlertsList alerts={mockAlerts} />
+        </div>
+
+        {/* ✅ You can use this extra container too if needed */}
+        <div className="mt-10 bg-white rounded-xl shadow p-6">
+          <p className="text-gray-600">This is a placeholder div you asked to complete earlier.</p>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
