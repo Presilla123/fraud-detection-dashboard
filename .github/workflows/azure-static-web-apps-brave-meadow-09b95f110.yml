@@ -39,7 +39,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"         # Your project root
-          api_location: ""          # Leave it empty if no changes needed
+          api_location: ""          # Leave empty if you're not using an API
           output_location: "dist"   # ✅ Vite outputs to "dist"
 
   close_pull_request_job:
